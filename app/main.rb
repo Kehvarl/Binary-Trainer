@@ -3,6 +3,55 @@ require 'app/display.rb'
 require 'app/timer.rb'
 require 'app/7segment_display.rb'
 
+class Switch_Display
+  def initialize vars={}
+    @x = vars.x || 640
+    @y = vars.y || 360
+    @w = 64
+    @h = 96
+    setup_display()
+    @switches = create_switchline(4)
+    @leds = create_leds (4)
+  end
+
+  def setup_display
+    @display = SevenSegmentDisplay.new({})
+  end
+
+  def create_switchline count
+    line = []
+    start = (720 - (count * 48)).div(2)
+    (0...count).each do |x|
+      line << Toggle_Switch.new({x:x*50 + start,y:640, w:48, h:96})
+    end
+    line
+  end
+
+  def create_leds count, spacing=5, color={r:128, g:128, b:128}
+    leds = []
+    count.times do |t|
+      leds << make_led(t, color)
+    end
+    leds
+  end
+
+  def make_led index, color
+    total_gaps = (@segments - 1) * @led_spacing
+    spacing = @w - total_gaps
+    segment_w = spacing.to_f / @segments
+    x = index * (segment_w + @led_spacing) + (segment_w - @led_w) / 2.0
+    y = (@h - @led_h) / 2
+    {x:x, y:y, w:@led_w, h:@led_h, path: "sprites/led_gs.png", **color}.sprite!
+  end
+
+  def render
+    out = []
+    out << @display.render
+    out << @switchline
+    out << @ledline
+  end
+end
+
 def init args
   args.state.game_over = false
   args.state.won = false
