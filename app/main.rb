@@ -4,6 +4,7 @@ require 'app/timer.rb'
 require 'app/7segment_display.rb'
 
 class Switch_Display
+  attr_accessor :value
   def initialize vars={}
     @x = vars.x || 640
     @y = vars.y || 360
@@ -12,6 +13,7 @@ class Switch_Display
     @display = SevenSegmentDisplay.new({x:@x+@w/4, y:@y+168, w:@w/2, h:96, digits:2})
     @switches = create_switchline(4)
     @leds = create_leds (4)
+    @value = 0
 
   end
 
@@ -40,10 +42,10 @@ class Switch_Display
   end
 
   def tick args
-    value = 0
+    @value = 0
     @switches.each {|s| s.tick(args)}
     @switches.each_with_index do |s,i|
-      value ^= (s.status << (3-i))
+      @value ^= (s.status << (3-i))
       if s.status == 1
         @leds[i].r = 255
         @leds[i].g = 255
@@ -54,7 +56,7 @@ class Switch_Display
         @leds[i].b = 128
       end
     end
-    @display.set_value("%02d"%value)
+    @display.set_value("%02d"%@value)
   end
 
   def render
