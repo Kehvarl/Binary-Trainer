@@ -8,8 +8,8 @@ class Switch_Display
     @x = vars.x || 640
     @y = vars.y || 360
     @w = 256
-    @h = 192
-    @display = SevenSegmentDisplay.new({x:@x, y:@y+96, w:@w, h:96})
+    @h = 264
+    @display = SevenSegmentDisplay.new({x:@x+@w/4, y:@y+168, w:@w/2, h:96, digits:2})
     @switches = create_switchline(4)
     @leds = create_leds (4)
 
@@ -17,9 +17,8 @@ class Switch_Display
 
   def create_switchline count
     line = []
-    start = (640 - (count * 48)).div(2)
     (0...count).each do |x|
-      line << Toggle_Switch.new({x:x*50 + start,y:@y+32, w:48, h:96})
+      line << Toggle_Switch.new({x:x*64 + @x,y:@y, w:60, h:96})
     end
     line
   end
@@ -37,8 +36,25 @@ class Switch_Display
     spacing = @w - total_gaps
     segment_w = spacing.to_f / 4
     x = index * (segment_w + 3) + (segment_w - 64) / 2.0
-    y = (@h - 64) / 2
-    {x:x, y:y, w:64, h:64, path: "sprites/led_gs.png", **color}.sprite!
+    {x:x+@x+16, y:@y+116, w:32, h:32, path: "sprites/led_gs.png", **color}.sprite!
+  end
+
+  def tick args
+    value = 0
+    @switches.each {|s| s.tick(args)}
+    @switches.each_with_index do |s,i|
+      value ^= (s.status << (3-i))
+      if s.status == 1
+        @leds[i].r = 255
+        @leds[i].g = 255
+        @leds[i].b = 0
+      else
+        @leds[i].r = 128
+        @leds[i].g = 128
+        @leds[i].b = 128
+      end
+    end
+    @display.set_value("%02d"%value)
   end
 
   def render
@@ -51,7 +67,8 @@ class Switch_Display
 end
 
 def init args
-  args.state.test = Switch_Display.new()
+  args.state.test1 = Switch_Display.new({x:128})
+  args.state.test2 = Switch_Display.new({x:512})
 end
 
 def set_switches(args, count)
@@ -63,49 +80,16 @@ def generate_target (switch_count)
   rand(2**switch_count)
 end
 
-def switchline count
-  line = []
-  start = (720 - (count * 48)).div(2)
-  (0...count).each do |x|
-    line << Toggle_Switch.new({x:x*50 + start,y:640, w:48, h:96})
-  end
-  line
-end
-
-def calculate args
-  output = 0
-  states = [0,0,0]
-
-  args.state.switches.each_with_index do |s,i|
-    expected = (args.state.target >> (args.state.switches.length - 1 - i)) & 1
-    if s.status == expected
-      states[0] += 1
-    else
-      states[2] += 1
-    end
-    if i > 0
-      output <<= 1
-    end
-    output |= s.status
-  end
-  if args.inputs.keyboard.key_up.enter or args.state.button.status
-    args.state.display.add_line(states)
-    args.state.button.status = false
-    if output == args.state.target
-      args.state.timer.color_override = {r:0, g:255, b:255}
-      set_switches(args, args.state.switches.size + 1)
-    end
-  end
-  return output
-end
-
-
 def tick args
   if Kernel.tick_count <= 0
       init args
   end
+  args.state.test1.tick(args)
+  args.state.test2.tick(args)
 
   args.outputs.primitives << {x:0, y:0, w:1280, h:720, r:0, g:0, b:0}.solid!
 
-  args.outputs.primitives << args.state.test.render
+  args.outputs.primitives << args.state.test1.render
+  args.outputs.primitives << args.state.test2.render
+
 end
