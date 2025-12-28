@@ -8,6 +8,8 @@ class Switch_Display
     @display = SevenSegmentDisplay.new({x:@x+@w/4, y:@y+168, w:@w/2, h:96, digits:2})
     @switches = create_switchline(4)
     @leds = create_leds (4)
+    @inactive_color = vars.inactive || {r:64, g:64, b:64}
+    @active_color = vars.active || {r:0, g:255, b:32}
     @value = 0
 
   end
@@ -42,13 +44,9 @@ class Switch_Display
     @switches.each_with_index do |s,i|
       @value ^= (s.status << (3-i))
       if s.status == 1
-        @leds[i].r = 255
-        @leds[i].g = 255
-        @leds[i].b = 0
+        @leds[i] = @leds[i].merge(@active_color)
       else
-        @leds[i].r = 128
-        @leds[i].g = 128
-        @leds[i].b = 128
+        @leds[i] = @leds[i].merge(@inactive_color)
       end
     end
     @display.set_value("%02d"%@value)
