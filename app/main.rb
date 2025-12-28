@@ -67,7 +67,8 @@ class Switch_Display
 end
 
 def init args
-  args.state.test = Switch_Display.new()
+  args.state.test1 = Switch_Display.new({x:128})
+  args.state.test2 = Switch_Display.new({x:512})
 end
 
 def set_switches(args, count)
@@ -83,9 +84,12 @@ def tick args
   if Kernel.tick_count <= 0
       init args
   end
-  args.state.test.tick(args)
+  args.state.test1.tick(args)
+  args.state.test2.tick(args)
 
   args.outputs.primitives << {x:0, y:0, w:1280, h:720, r:0, g:0, b:0}.solid!
 
-  args.outputs.primitives << args.state.test.render
+  args.outputs.primitives << args.state.test1.render
+  args.outputs.primitives << args.state.test2.render
+
 end
