@@ -1,4 +1,8 @@
-* EXCEPTION: invalid string for number("f")
+* EXCEPTION: nil cannot be converted to Hash
 ** Backtrace:
-*** app/main.rb:59:in tick
-*** app/main.rb:89:in tick
+*** app/display.rb:39:in make_led
+*** app/display.rb:29:in create_leds
+*** app/display.rb:28:in create_leds
+*** app/display.rb:10:in initialize
+*** app/main.rb:8:in init
+*** app/main.rb:18:in tick

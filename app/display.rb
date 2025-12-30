@@ -1,5 +1,5 @@
 class Switch_Display
-  attr_accessor :value
+  attr_accessor :value, :show_target
   def initialize vars={}
     @x = vars.x || 640
     @y = vars.y || 360
@@ -10,7 +10,8 @@ class Switch_Display
     @leds = create_leds (4)
     @inactive_color = vars.inactive || {r:64, g:64, b:64}
     @active_color = vars.active || {r:0, g:255, b:32}
-    @value = 0
+    @value = vars.value || 0
+    @show_target = vars.show_target || false
 
   end
 
@@ -22,7 +23,7 @@ class Switch_Display
     line
   end
 
-  def create_leds count, spacing=5, color={r:128, g:128, b:128}
+  def create_leds count, spacing=5, color={r:64, g:64, b:64}
     leds = []
     count.times do |t|
       leds << make_led(t, color)
@@ -39,14 +40,24 @@ class Switch_Display
   end
 
   def tick args
-    @value = 0
     @switches.each {|s| s.tick(args)}
-    @switches.each_with_index do |s,i|
-      @value ^= (s.status << (3-i))
-      if s.status == 1
-        @leds[i] = @leds[i].merge(@active_color)
-      else
-        @leds[i] = @leds[i].merge(@inactive_color)
+    if not @show_target
+      @value = 0
+      @switches.each_with_index do |s,i|
+        @value ^= (s.status << (3-i))
+        if s.status == 1
+          @leds[i] = @leds[i].merge(@active_color)
+        else
+          @leds[i] = @leds[i].merge(@inactive_color)
+        end
+      end
+    else
+      @leds.each_with_index do |l,i|
+        if (@value >> (@leds.length - 1 - i)) & 1 == 1
+          @leds[i] = @leds[i].merge(@active_color)
+        else
+          @leds[i] = @leds[i].merge(@inactive_color)
+        end
       end
     end
     @display.set_value("%02d"%@value)
