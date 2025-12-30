@@ -5,7 +5,7 @@ require 'app/7segment_display.rb'
 
 
 def init args
-  args.state.d1 = Switch_Display.new({x:128})
+  args.state.d1 = Switch_Display.new({x:128, show_target:true, value:13})
   args.state.d2 = Switch_Display.new({x:512})
 end
 
