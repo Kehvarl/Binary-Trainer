@@ -1,3 +1,6 @@
+require 'app/switch.rb'
+require 'app/7segment_display.rb'
+
 class Switch_Display
   attr_accessor :value, :show_target
   def initialize vars={}

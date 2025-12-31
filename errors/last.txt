@@ -1,8 +1,9 @@
-* EXCEPTION: nil cannot be converted to Hash
+* EXCEPTION:
+* ERROR: Exception while requiring app/main.rb.
+* ERROR: Exception while requiring app/switch_display.rb.
+app/switch_display.rb does not exist.
 ** Backtrace:
-*** app/display.rb:39:in make_led
-*** app/display.rb:29:in create_leds
-*** app/display.rb:28:in create_leds
-*** app/display.rb:10:in initialize
-*** app/main.rb:8:in init
-*** app/main.rb:18:in tick
+*** app/main.rb:2
+** Backtrace:
+*** app/main.rb:2
+** Backtrace:

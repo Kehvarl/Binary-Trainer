@@ -1,6 +1,5 @@
 require 'app/switch.rb'
-require 'app/display.rb'
-require 'app/timer.rb'
+require 'app/switch_display.rb'
 require 'app/7segment_display.rb'
 
 
