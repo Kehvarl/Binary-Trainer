@@ -1,6 +1,4 @@
-require 'app/switch.rb'
 require 'app/switch_display.rb'
-require 'app/7segment_display.rb'
 
 
 def init args
@@ -11,6 +9,7 @@ end
 def generate_target (switch_count)
   rand(2**switch_count)
 end
+
 
 def tick args
   if Kernel.tick_count <= 0
