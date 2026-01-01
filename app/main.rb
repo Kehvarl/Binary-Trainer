@@ -2,8 +2,19 @@ require 'app/switch_display.rb'
 
 
 def init args
-  args.state.d1 = Switch_Display.new({x:128, show_target:true, value:13})
-  args.state.d2 = Switch_Display.new({x:512})
+  args.state.displays = setup_displays(2)
+end
+
+def setup_displays display_count
+  displays = []
+  max_width = 1280
+  screen_center = 640
+  display_width = 256
+  start_x = screen_center - ((display_width * display_count)/2)
+  display_count.each do |c|
+    displays << Switch_Display.new({x: (start_x + (c * display_width)), mode: :Octal})
+  end
+  displays
 end
 
 def generate_target (switch_count)
@@ -15,12 +26,11 @@ def tick args
   if Kernel.tick_count <= 0
       init args
   end
-  args.state.d1.tick(args)
-  args.state.d2.tick(args)
+  args.state.displays.each{|d| d.tick(args)}
 
   args.outputs.primitives << {x:0, y:0, w:1280, h:720, r:0, g:0, b:0}.solid!
 
-  args.outputs.primitives << args.state.d1.render
-  args.outputs.primitives << args.state.d2.render
-
+  args.state.displays.each do |d|
+    args.outputs.primitives << d.render
+  end
 end
