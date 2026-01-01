@@ -1,9 +1,19 @@
 * EXCEPTION:
-* ERROR: Exception while requiring app/main.rb.
-* ERROR: Exception while requiring app/switch_display.rb.
-app/switch_display.rb does not exist.
+* ERROR - :len method missing on ~Array~.
+
+#+begin_src ~Array#inspect~
+[#<Toggle_Switch:0x3ca83a0 @source_x=128, @source_w=32, @h=96, @x=384.0, @source_y=0, @w=60, @y=360, @held=false, @sprite_width=32, @path="sprites/on_off_anim.png", @status=0, @animating=false, @onlick=nil, @source_h=64>, #<Toggle_Switch:0x3ca6f30 @source_x=128, @source_w=32, @h=96, @x=448.0, @source_y=0, @w=60, @y=360, @held=false, @sprite_width=32, @path="sprites/on_off_anim.png", @status=0, @animating=false, @onlick=nil, @source_h=64>, #<Toggle_Switch:0x3ca6de0 @source_x=128, @source_w=32, @h=96, @x=512.0, @source_y=0, @w=60, @y=360, @held=false, @sprite_width=32, @path="sprites/on_off_anim.png", @status=0, @animating=false, @onlick=nil, @source_h=64>]
+#+end_src ~Array#inspect~
+
+
+
+The method named
+  :len
+doesn't exist on [Array, #<Class:#<Array:0x3ca8580>>, Enumerable].
+
+(suggestions above)
 ** Backtrace:
-*** app/main.rb:2
-** Backtrace:
-*** app/main.rb:2
-** Backtrace:
+*** app/switch_display.rb:100:in tick
+*** app/switch_display.rb:99:in tick
+*** app/main.rb:29:in tick
+*** app/main.rb:29:in tick
