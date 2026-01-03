@@ -2,6 +2,11 @@
 ## Overview
 A simple tutor for Octal, Decimal, and Hexadecimal to Binary
 
+## ToDo
+### 7 Segment Display
+### Input/Switch-Decoder
+### Keypad input
+
 ## Game Modes
 ### Tutor
   Show a number
