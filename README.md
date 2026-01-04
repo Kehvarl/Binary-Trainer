@@ -4,8 +4,16 @@ A simple tutor for Octal, Decimal, and Hexadecimal to Binary
 
 ## ToDo
 ### 7 Segment Display
+  Working: 0-9
+  ToDo:
+    A-F
+    Min/Max W/H
 ### Input/Switch-Decoder
+  ToDo: Better scaling for Octal (3-bit) numbers
 ### Keypad input
+  ToDo:
+    Key Graphics
+    input routine
 
 ## Game Modes
 ### Tutor
