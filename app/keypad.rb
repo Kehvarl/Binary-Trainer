@@ -9,9 +9,16 @@ end
 
 class KeyPad
     def initialize vars={}
+        setup_keypad
     end
 
     def setup_keypad
+        @buttons = []
+        16.each do |b|
+            button = []
+            button << b
+            @buttond << button
+        end
     end
 
     def tick args
