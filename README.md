@@ -11,6 +11,8 @@ A simple tutor for Octal, Decimal, and Hexadecimal to Binary
 ### Input/Switch-Decoder
   ToDo: Better scaling for Octal (3-bit) numbers
 ### Keypad input
+  Working:
+    Some keypad generation
   ToDo:
     Key Graphics
     input routine
