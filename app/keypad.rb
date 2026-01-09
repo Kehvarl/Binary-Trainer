@@ -56,22 +56,26 @@ class KeyPad
 
     def setup_keypad
         @buttons = []
-        col = 0
-        @keys.each do |b|
-            button = []
-            button << b
-            @buttons << button
+        @keys.each do |b, i|
+            @buttons << Key.new({x:(i*64)%@cols, y:i.div(cols)*64})
         end
     end
 
     def tick args
-        #Find all collision [buttons]+mouse
-        #If clicked and Collision
-        # Animate button
-        # Get Button value
-        # Set clicked state
+        if args.mouse.clicked
+            #Find all collision [buttons]+mouse
+
+            clicked_buttons = args.geometry.find_all_intersect_rect(mouse, @buttons)
+            if clicked_buttons.size > 0
+                @status = clicked_buttons[0].value
+                clicked_buttons[0].animating = true
+            end
+        end
+        @buttons.each{|b| b.tick args}
+
     end
 
     def render
+        @buttons
     end
 end
