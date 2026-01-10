@@ -1,19 +1,20 @@
 * EXCEPTION:
-* ERROR - :len method missing on ~Array~.
+* ERROR - :cols method missing on ~KeyPad~.
 
-#+begin_src ~Array#inspect~
-[#<Toggle_Switch:0x3ca83a0 @source_x=128, @source_w=32, @h=96, @x=384.0, @source_y=0, @w=60, @y=360, @held=false, @sprite_width=32, @path="sprites/on_off_anim.png", @status=0, @animating=false, @onlick=nil, @source_h=64>, #<Toggle_Switch:0x3ca6f30 @source_x=128, @source_w=32, @h=96, @x=448.0, @source_y=0, @w=60, @y=360, @held=false, @sprite_width=32, @path="sprites/on_off_anim.png", @status=0, @animating=false, @onlick=nil, @source_h=64>, #<Toggle_Switch:0x3ca6de0 @source_x=128, @source_w=32, @h=96, @x=512.0, @source_y=0, @w=60, @y=360, @held=false, @sprite_width=32, @path="sprites/on_off_anim.png", @status=0, @animating=false, @onlick=nil, @source_h=64>]
-#+end_src ~Array#inspect~
+#+begin_src ~KeyPad#inspect~
+#<KeyPad:0x1457d970 @buttons=[], @cols=4, @keys=["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", :DEL, :OK, :CLR]>
+#+end_src ~KeyPad#inspect~
 
 
 
 The method named
-  :len
-doesn't exist on [Array, #<Class:#<Array:0x3ca8580>>, Enumerable].
+  :cols
+doesn't exist on [KeyPad, #<Class:#<KeyPad:0x1457d970>>].
 
 (suggestions above)
 ** Backtrace:
-*** app/switch_display.rb:100:in tick
-*** app/switch_display.rb:99:in tick
-*** app/main.rb:29:in tick
+*** app/keypad.rb:60:in setup_keypad
+*** app/keypad.rb:59:in setup_keypad
+*** app/keypad.rb:53:in initialize
+*** app/main.rb:7:in init
 *** app/main.rb:29:in tick
