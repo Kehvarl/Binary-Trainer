@@ -7,6 +7,9 @@ class Key
         @w = vars.w || 64
         @h = vars.h || 64
         @path = 'sprites/button_gs.png'
+        @r = 64
+        @g = 64
+        @b = 64
         @value = vars.value || 0
         @animating = false
         @frame_delay = 5
@@ -56,8 +59,9 @@ class KeyPad
 
     def setup_keypad
         @buttons = []
-        @keys.each do |b, i|
-            @buttons << Key.new({x:(i*64)%@cols, y:i.div(cols)*64})
+        @keys.each_with_index do |b, i|
+            # Need to add numbers somehow.
+            @buttons << Key.new({x:(i%@cols)*64, y:i.div(@cols)*64})
         end
     end
 

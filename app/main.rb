@@ -1,8 +1,10 @@
 require 'app/switch_display.rb'
+require 'app/keypad.rb'
 
 
 def init args
   args.state.displays = setup_displays(2)
+  args.state.test = KeyPad.new()
 end
 
 def setup_displays display_count
@@ -33,4 +35,5 @@ def tick args
   args.state.displays.each do |d|
     args.outputs.primitives << d.render
   end
+  args.outputs.primitives << args.state.test.render()
 end
