@@ -60,6 +60,7 @@ class KeyPad
     def setup_keypad
         @buttons = []
         @keys.each_with_index do |b, i|
+            # Need to add numbers somehow.
             @buttons << Key.new({x:(i%@cols)*64, y:i.div(@cols)*64})
         end
     end
