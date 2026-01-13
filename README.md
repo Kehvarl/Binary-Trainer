@@ -8,8 +8,6 @@ A simple tutor for Octal, Decimal, and Hexadecimal to Binary
   ToDo:
     A-F Sprites (Hexadecimal)
     Min/Max W/H
-### 14 Segment Display
-
 ### Input/Switch-Decoder
   ToDo: Better scaling for Octal (3-bit) numbers
 ### Keypad input

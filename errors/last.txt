@@ -1,20 +1,8 @@
-* EXCEPTION:
-* ERROR - :cols method missing on ~KeyPad~.
-
-#+begin_src ~KeyPad#inspect~
-#<KeyPad:0x1457d970 @buttons=[], @cols=4, @keys=["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", :DEL, :OK, :CLR]>
-#+end_src ~KeyPad#inspect~
-
-
-
-The method named
-  :cols
-doesn't exist on [KeyPad, #<Class:#<KeyPad:0x1457d970>>].
-
-(suggestions above)
+* EXCEPTION: 'initialize': wrong number of arguments (2 for 0)
 ** Backtrace:
-*** app/keypad.rb:60:in setup_keypad
-*** app/keypad.rb:59:in setup_keypad
-*** app/keypad.rb:53:in initialize
+*** app/keypad.rb:4:in initialize
+*** app/keypad.rb:68:in setup_keypad
+*** app/keypad.rb:66:in setup_keypad
+*** app/keypad.rb:60:in initialize
 *** app/main.rb:7:in init
 *** app/main.rb:29:in tick
