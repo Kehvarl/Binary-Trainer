@@ -6,7 +6,11 @@ class Key
         @y = vars.y || 0
         @w = vars.w || 64
         @h = vars.h || 64
-        @path = 'sprites/button_gs.png'
+        @path = 'sprites/7s-64x96_digits_sheet.png'
+        @source_x = vars.source_x || 0
+        @source_y = vars.source_y || 0
+        @source_w = 64
+        @source_h = 96
         @r = 64
         @g = 64
         @b = 64
@@ -61,7 +65,7 @@ class KeyPad
         @buttons = []
         @keys.each_with_index do |b, i|
             # Need to add numbers somehow.
-            @buttons << Key.new({x:(i%@cols)*64, y:i.div(@cols)*64})
+            @buttons << Key.new({x:(i%@cols)*64, y:i.div(@cols)*64, source_x:(i*64)})
         end
     end
 
