@@ -65,15 +65,16 @@ class KeyPad
         @buttons = []
         @keys.each_with_index do |b, i|
             # Need to add numbers somehow.
-            @buttons << Key.new({x:(i%@cols)*64, y:i.div(@cols)*64, source_x:(i*64)})
+            @buttons << Key.new({x:(i%@cols)*64, y:i.div(@cols)*64, source_x:(i*64), value:b})
         end
     end
 
     def tick args
-        if args.mouse.clicked
+        @status = nil
+        if args.mouse.click
             #Find all collision [buttons]+mouse
 
-            clicked_buttons = args.geometry.find_all_intersect_rect(mouse, @buttons)
+            clicked_buttons = args.geometry.find_all_intersect_rect(args.mouse, @buttons)
             if clicked_buttons.size > 0
                 @status = clicked_buttons[0].value
                 clicked_buttons[0].animating = true
