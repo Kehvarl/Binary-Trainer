@@ -24,6 +24,7 @@ class Key
 
     def start_animation
         @animating = true
+        @g = 255
         @next_frame = @frame_delay
         @frame = 0
     end
@@ -38,12 +39,18 @@ class Key
         if @frame >= @frame_count
             @animating = false
             @frame = 0
+            @g = 64
         end
     end
 
     def tick args
         if @animating
             animate
+        end
+        if self.intersect_rect?(args.mouse)
+            @g = 255
+        else
+            @g = 64
         end
     end
 end
