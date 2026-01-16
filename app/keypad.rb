@@ -1,3 +1,5 @@
+require 'app/7segment_display.rb'
+
 class Key
     attr_sprite
     attr_accessor :value, :animating
@@ -93,5 +95,23 @@ class KeyPad
 
     def render
         @buttons
+    end
+end
+
+def class KeyPadDisplay
+    def initialize vars={}
+        @x = vars.x || 0
+        @y = vars.y || 0
+        @w = vars.w || 288
+        @h = vars.h || 384
+        @display = []
+        @keypad = []
+    end
+
+    def tick args
+    end
+
+    def render
+        [@background, @display.render, @keypad.render]
     end
 end
