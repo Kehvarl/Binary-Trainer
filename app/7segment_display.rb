@@ -96,6 +96,9 @@ class SevenSegmentDisplay
         @digits.each{|d| d.set_color(r, g, b)}
     end
 
+    def tick args
+    end
+
     def render
         out = []
         @digits.each do |d|

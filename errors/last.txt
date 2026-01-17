@@ -1,35 +1,17 @@
 * EXCEPTION:
-* ERROR - :intersect_rect method missing on ~Module~.
+* ERROR - :argsdef method missing on ~KeyPadDisplay~.
 
-#+begin_src ~Module#inspect~
-GTK::Geometry
-#+end_src ~Module#inspect~
+#+begin_src ~KeyPadDisplay#inspect~
+#<KeyPadDisplay:0xcb1d3c0 @display=#<SevenSegmentDisplay:0xcb1cbe0>, @keypad=#<KeyPad:0xcb13ac0>, @h=384, @x=0, @background={:x=>0, :y=>0, :w=>288, :h=>384, :r=>96, :g=>96, :b=>96, :primitive_marker=>:solid}, @w=288, @y=0>
+#+end_src ~KeyPadDisplay#inspect~
 
-** Did you mean?
-Here's a list of methods that kind of look like :intersect_rect.
-*** :intersect_rect?
-*** :intersect_bounding_box?
-*** :intersect_circle?
-*** :intersects_rect?
-*** :rect?
-*** :rect_center_point
-*** :rect_navigate
-*** :rect_navigate_left_right
-*** :rect_navigate_up_down
-*** :rect_normalize
-*** :rect_props
-*** :rect_to_circle
-*** :rect_to_line
+
 
 The method named
-  :intersect_rect
-with args
-  [{:x=>477.0, :y=>202.0, :moved=>nil, :moved_at=>-1, :has_focus=>true}, #<Key:0x3432fcc0 @x=0, @animating=false, @frame_count=1, @w=64, @r=64, @path="sprites/7s-64x96_digits_sheet.png", @frame=0, @next_frame=0, @source_x=0, @source_w=64, @h=64, @source_y=0, @g=64, @y=0, @b=64, @value="0", @source_h=96, @frame_delay=5>]
-doesn't exist on [Module].
+  :argsdef
+doesn't exist on [KeyPadDisplay, #<Class:#<KeyPadDisplay:0xcb1d3c0>>].
 
 (suggestions above)
 ** Backtrace:
-*** app/keypad.rb:50:in tick
-*** app/keypad.rb:90:in tick
-*** app/keypad.rb:90:in tick
+*** app/keypad.rb:117:in tick
 *** app/main.rb:38:in tick
