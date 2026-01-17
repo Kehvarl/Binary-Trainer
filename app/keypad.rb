@@ -60,6 +60,10 @@ end
 class KeyPad
     attr_accessor :status
     def initialize vars={}
+        @x = vars.x || 0
+        @y = vars.y || 0
+        @w = vars.w || 256
+        @h = vars.h || 320
         @keys = ['0', '1', '2', '3',
                 '4', '5', '6', '7',
                 '8', '9', 'A', 'B',
@@ -74,7 +78,7 @@ class KeyPad
         @buttons = []
         @keys.each_with_index do |b, i|
             # Need to add numbers somehow.
-            @buttons << Key.new({x:(i%@cols)*64, y:i.div(@cols)*64, source_x:(i*64), value:b})
+            @buttons << Key.new({x:(i%@cols)*64+@x, y:i.div(@cols)*64+@y, source_x:(i*64), value:b})
         end
     end
 
@@ -98,17 +102,24 @@ class KeyPad
     end
 end
 
-def class KeyPadDisplay
+class KeyPadDisplay
     def initialize vars={}
         @x = vars.x || 0
         @y = vars.y || 0
         @w = vars.w || 288
         @h = vars.h || 384
-        @display = []
-        @keypad = []
+        @background = {x:@x, y:@y, w:@w, h:@h, r:96, g:96, b:96}.solid!
+        @display = SevenSegmentDisplay.new({x:@x+16, y:@y+272, w:@w-32, h:96, digits:4})
+        @keypad = KeyPad.new({x:@x+16, y:@y+16, w:@w-32, h:@h-128})
+    end
+
+    def status
+        @keypad.status
     end
 
     def tick args
+        @keypad.tick args
+        @display.tick args
     end
 
     def render
