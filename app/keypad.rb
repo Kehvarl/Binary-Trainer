@@ -107,18 +107,40 @@ class KeyPadDisplay
         @x = vars.x || 0
         @y = vars.y || 0
         @w = vars.w || 288
-        @h = vars.h || 384
+        @h = vars.h || 448
         @background = {x:@x, y:@y, w:@w, h:@h, r:96, g:96, b:96}.solid!
-        @display = SevenSegmentDisplay.new({x:@x+16, y:@y+272, w:@w-32, h:96, digits:4})
+        @display = SevenSegmentDisplay.new({x:@x+16, y:@y+334, w:@w-32, h:96, digits:4})
         @keypad = KeyPad.new({x:@x+16, y:@y+16, w:@w-32, h:@h-128})
+        @value = "0000"
     end
 
     def status
-        @keypad.status
+        {value:@value, key:@keypad.status}
+    end
+
+    def is_numeric value
+        begin
+            value = Integer(value)
+            return true
+        rescue
+            return false
+        end
     end
 
     def tick args
         @keypad.tick args
+        case @keypad.status
+        when :CLR
+            @value = "0000"
+        when :DEL
+            @value = "0" + @value[0,3]
+        when '1','2','3','4','5','6','7','8','9','0'
+            @value = @value[1,3] + @keypad.status
+            puts @value
+        else
+            # nil value
+        end
+        @display.set_value(@value)
         @display.tick args
     end
 

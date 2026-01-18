@@ -1,17 +1,19 @@
 * EXCEPTION:
-* ERROR - :argsdef method missing on ~KeyPadDisplay~.
+* ERROR - :+ method missing on ~NilClass~.
 
-#+begin_src ~KeyPadDisplay#inspect~
-#<KeyPadDisplay:0xcb1d3c0 @display=#<SevenSegmentDisplay:0xcb1cbe0>, @keypad=#<KeyPad:0xcb13ac0>, @h=384, @x=0, @background={:x=>0, :y=>0, :w=>288, :h=>384, :r=>96, :g=>96, :b=>96, :primitive_marker=>:solid}, @w=288, @y=0>
-#+end_src ~KeyPadDisplay#inspect~
+#+begin_src ~NilClass#inspect~
+nil
+#+end_src ~NilClass#inspect~
 
 
 
 The method named
-  :argsdef
-doesn't exist on [KeyPadDisplay, #<Class:#<KeyPadDisplay:0xcb1d3c0>>].
+  :+
+with args
+  ["8"]
+doesn't exist on [NilClass, NilClassFalseClass].
 
 (suggestions above)
 ** Backtrace:
-*** app/keypad.rb:117:in tick
+*** app/keypad.rb:138:in tick
 *** app/main.rb:38:in tick
