@@ -1,19 +1,20 @@
 * EXCEPTION:
-* ERROR - :+ method missing on ~NilClass~.
+* ERROR - :animating= method missing on ~LabelKey~.
 
-#+begin_src ~NilClass#inspect~
-nil
-#+end_src ~NilClass#inspect~
+#+begin_src ~LabelKey#inspect~
+#<LabelKey:0x1204b7f0 @text="OK", @h=64, @x=80, @g=255, @b=64, @w=64, @y=272, @size_enum=12, @r=64, @value=:OK>
+#+end_src ~LabelKey#inspect~
 
 
 
 The method named
-  :+
+  :animating=
 with args
-  ["8"]
-doesn't exist on [NilClass, NilClassFalseClass].
+  [true]
+doesn't exist on [LabelKey, #<Class:#<LabelKey:0x1204b7f0>>].
 
 (suggestions above)
 ** Backtrace:
-*** app/keypad.rb:138:in tick
+*** app/keypad.rb:137:in tick
+*** app/keypad.rb:179:in tick
 *** app/main.rb:38:in tick
