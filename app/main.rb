@@ -38,6 +38,6 @@ def tick args
   args.state.test.tick(args)
   args.outputs.primitives << args.state.test.render()
   if args.state.test.status
-    puts args.state.test.status
+    #puts args.state.test.status
   end
 end

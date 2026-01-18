@@ -55,6 +55,45 @@ class Key
             @g = 64
         end
     end
+
+    def render
+        self
+    end
+end
+
+class LabelKey
+    attr_accessor :x, :y, :w, :h, :r, :g, :b, :a, :text, :font, :anchor_x,
+            :anchor_y, :blendmode_enum, :size_px, :size_enum, :alignment_enum,
+            :vertical_alignment_enum, :value, :animating
+
+    def initialize vars={}
+        @x = vars.x || 0
+        @y = vars.y || 0
+        @w = vars.w || 64
+        @h = vars.h || 64
+        @size_enum = 12
+        @r = 64
+        @g = 64
+        @b = 64
+        @value = vars.value || 0
+        @text = vars.value.to_s || ""
+        @animating = false
+    end
+
+    def tick args
+        if args.geometry.intersect_rect?(self, args.mouse)
+            @g = 255
+        else
+            @g = 64
+        end
+    end
+
+    def render
+        out = []
+        out << {x:@x, y:@y, w:@w, h:@h, r:@r, g:@g, b:@b}.border!
+        out << {x:@x, y:@y+48, r:@r, g:@g, b:@b, size_enum:@size_enum, text:@text}.label!
+        out
+    end
 end
 
 class KeyPad
@@ -78,7 +117,13 @@ class KeyPad
         @buttons = []
         @keys.each_with_index do |b, i|
             # Need to add numbers somehow.
-            @buttons << Key.new({x:(i%@cols)*64+@x, y:i.div(@cols)*64+@y, source_x:(i*64), value:b})
+            if ['0', '1', '2', '3',
+                '4', '5', '6', '7',
+                '8', '9'].include?(b)
+                @buttons << Key.new({x:(i%@cols)*64+@x, y:i.div(@cols)*64+@y, source_x:(i*64), value:b})
+            else
+                @buttons << LabelKey.new({x:(i%@cols)*64+@x, y:i.div(@cols)*64+@y, value:b})
+            end
         end
     end
 
@@ -98,7 +143,11 @@ class KeyPad
     end
 
     def render
-        @buttons
+        out = []
+        @buttons.each do |b|
+            out << b.render
+        end
+        out
     end
 end
 
@@ -136,7 +185,6 @@ class KeyPadDisplay
             @value = "0" + @value[0,3]
         when '1','2','3','4','5','6','7','8','9','0'
             @value = @value[1,3] + @keypad.status
-            puts @value
         else
             # nil value
         end
