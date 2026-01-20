@@ -1,20 +1,21 @@
 * EXCEPTION:
-* ERROR - :animating= method missing on ~LabelKey~.
+* ERROR - :continue method missing on ~KeyPad~.
 
-#+begin_src ~LabelKey#inspect~
-#<LabelKey:0x1204b7f0 @text="OK", @h=64, @x=80, @g=255, @b=64, @w=64, @y=272, @size_enum=12, @r=64, @value=:OK>
-#+end_src ~LabelKey#inspect~
+#+begin_src ~KeyPad#inspect~
+#<KeyPad:0x3fe0a20 @layout=[:DEL, "0", :OK, " ", "1", "2", "3", :CLR, "4", "5", "6", "F", "7", "8", "9", "E", "A", "B", "C", "D"], @buttons=[#<LabelKey:0x3fde5c0 @text="DEL", @h=64, @x=528, @g=64, @b=64, @w=64, @y=16, @size_enum=12, @r=64, @animating=false, @value=:DEL>, #<LabelKey:0x3fd8740 @text="0", @h=64, @x=592, @g=64, @b=64, @w=64, @y=16, @size_enum=12, @r=64, @animating=false, @value="0">, #<LabelKey:0x3fd8080 @text="OK", @h=64, @x=656, @g=64, @b=64, @w=64, @y=16, @size_enum=12, @r=64, @animating=false, @value=:OK>], @h=320, @x=528, @cols=4, @w=256, @y=16>
+#+end_src ~KeyPad#inspect~
 
 
 
 The method named
-  :animating=
-with args
-  [true]
-doesn't exist on [LabelKey, #<Class:#<LabelKey:0x1204b7f0>>].
+  :continue
+doesn't exist on [KeyPad, #<Class:#<KeyPad:0x3fe0a20>>].
 
 (suggestions above)
 ** Backtrace:
-*** app/keypad.rb:137:in tick
-*** app/keypad.rb:179:in tick
-*** app/main.rb:38:in tick
+*** app/keypad.rb:131:in setup_keypad
+*** app/keypad.rb:129:in setup_keypad
+*** app/keypad.rb:123:in initialize
+*** app/keypad.rb:174:in initialize
+*** app/main.rb:7:in init
+*** app/main.rb:29:in tick

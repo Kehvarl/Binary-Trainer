@@ -98,16 +98,27 @@ end
 
 class KeyPad
     attr_accessor :status
+    LAYOUT_ORD = ['0', '1', '2', '3',
+                  '4', '5', '6', '7',
+                  '8', '9', 'A', 'B',
+                  'C', 'D', 'E', 'F',
+                  :DEL, :OK, :CLR]
+    LAYOUT_HEX = [:DEL, '0', :OK, ' ',
+                  '1', '2', '3', :CLR,
+                  '4', '5', '6', 'F',
+                  '7', '8', '9', 'E',
+                  'A', 'B', 'C', 'D']
+    LAYOUT_DEC = ['7', '8', '9', :CLR,
+                  '4', '5', '6', :DEL,
+                  '1', '2', '3', ' ',
+                  ' ', '0', ' ', :OK,
+                  ' ', ' ', ' ', ' ']
     def initialize vars={}
         @x = vars.x || 0
         @y = vars.y || 0
         @w = vars.w || 256
         @h = vars.h || 320
-        @keys = ['0', '1', '2', '3',
-                '4', '5', '6', '7',
-                '8', '9', 'A', 'B',
-                'C', 'D', 'E', 'F',
-                :DEL, :OK, :CLR]
+        @layout = vars.layout || LAYOUT_DEC
         @cols = 4
         setup_keypad
         @status = nil
@@ -115,11 +126,12 @@ class KeyPad
 
     def setup_keypad
         @buttons = []
-        @keys.each_with_index do |b, i|
+        @layout.each_with_index do |b, i|
+            if b == '' or b == ' ' or b == nil
+                next
+            end
             # Need to add numbers somehow.
-            if ['0', '1', '2', '3',
-                '4', '5', '6', '7',
-                '8', '9'].include?(b)
+            if false #['0', '1', '2', '3','4', '5', '6', '7','8', '9'].include?(b)
                 @buttons << Key.new({x:(i%@cols)*64+@x, y:i.div(@cols)*64+@y, source_x:(i*64), value:b})
             else
                 @buttons << LabelKey.new({x:(i%@cols)*64+@x, y:i.div(@cols)*64+@y, value:b})
