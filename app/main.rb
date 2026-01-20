@@ -4,7 +4,7 @@ require 'app/keypad.rb'
 
 def init args
   args.state.displays = setup_displays(2)
-  args.state.test = KeyPadDisplay.new()
+  args.state.test = KeyPadDisplay.new({x:512})
 end
 
 def setup_displays display_count
