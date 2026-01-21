@@ -118,7 +118,7 @@ class KeyPad
         @y = vars.y || 0
         @w = vars.w || 256
         @h = vars.h || 320
-        @layout = vars.layout || LAYOUT_DEC
+        @layout = vars.layout || LAYOUT_HEX
         @cols = 4
         setup_keypad
         @status = nil
