@@ -6,8 +6,8 @@ class Switch_Display
   def initialize vars={}
     @x = vars.x || 640
     @y = vars.y || 360
-    @w = 256
-    @h = 264
+    @w = 128
+    @h = 128
     @mode = vars.mode || :Decimal
     setup_display
     @inactive_color = vars.inactive || {r:64, g:64, b:64}

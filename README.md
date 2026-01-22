@@ -2,6 +2,10 @@
 ## Overview
 A simple tutor for Octal, Decimal, and Hexadecimal to Binary
 
+## Some Game Ideas
+Show some dots, player types in number
+Show some number, player flips switches, then show right/wrong
+
 ## ToDo
 ### 7 Segment Display
   Working: 0-9
