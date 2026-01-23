@@ -194,7 +194,7 @@ class KeyPadDisplay
         when :CLR
             @value = "0000"
         when :DEL
-            @value = "0" + @value[0,3]
+            @value = "0" + @value[0...-1]
         when '1','2','3','4','5','6','7','8','9','0'
             @value = @value[1,3] + @keypad.status
         else
