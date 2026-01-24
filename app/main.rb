@@ -1,7 +1,6 @@
 require 'app/switch_display.rb'
 require 'app/keypad.rb'
 
-
 def init args
   args.state.displays = setup_displays(2)
   args.state.test = KeyPadDisplay.new({x:512})
@@ -22,7 +21,6 @@ end
 def generate_target (switch_count)
   rand(2**switch_count)
 end
-
 
 def tick args
   if Kernel.tick_count <= 0
