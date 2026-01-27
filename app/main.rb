@@ -10,6 +10,10 @@ end
 def menu_tick args
   args.outputs.primitives << {x:0, y:0, w:1280, h:720, r:0, g:0, b:0}.solid!
   args.outputs.primitives << {x:280, y:600, text:"Binary Trainer", size_enum:52, r:128, g:128, b:128}.label!
+
+  if args.mouse.click or args.keyboard.key_up.space
+    args.state.game_mode = :game
+  end
 end
 
 def setup_displays display_count
