@@ -2,8 +2,8 @@ require 'app/switch_display.rb'
 require 'app/keypad.rb'
 
 def init args
-  args.state.displays = setup_displays(2)
-  args.state.test = KeyPadDisplay.new({x:512})
+  args.state.binary = setup_displays(2)
+  args.state.dec = KeyPadDisplay.new({x:512})
   args.state.game_mode = :menu
 end
 
@@ -52,19 +52,19 @@ def tick args
 end
 
 def decimal_tick args
-  args.state.test.tick(args)
-  args.outputs.primitives << args.state.test.render()
-  if args.state.test.status
+  args.state.dec.tick(args)
+  args.outputs.primitives << args.state.dec.render()
+  if args.state.dec.status
     # puts args.state.test.status
   end
 end
 
 def binary_tick args
-  args.state.displays.each{|d| d.tick(args)}
+  args.state.binary.each{|d| d.tick(args)}
 
   args.outputs.primitives << {x:0, y:0, w:1280, h:720, r:0, g:0, b:0}.solid!
 
-  args.state.displays.each do |d|
+  args.state.binary.each do |d|
     args.outputs.primitives << d.render
   end
 end
