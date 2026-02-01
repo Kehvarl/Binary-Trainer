@@ -10,8 +10,8 @@ end
 def menu_tick args
   args.outputs.primitives << {x:0, y:0, w:1280, h:720, r:0, g:0, b:0}.solid!
   args.outputs.primitives << {x:280, y:600, text:"Binary Trainer", size_enum:52, r:128, g:128, b:128}.label!
-  args.outputs.primitives << {x:460, y:400, text:"Convert To Binary", size_enum:24, r:128, g:128, b:128}.label!
-  args.outputs.primitives << {x:460, y:300, text:"Convert To Decimal", size_enum:24, r:128, g:128, b:128}.label!
+  args.outputs.primitives << {x:440, y:400, text:"Convert To Binary", size_enum:24, r:128, g:128, b:128}.label!
+  args.outputs.primitives << {x:440, y:300, text:"Convert To Decimal", size_enum:24, r:128, g:128, b:128}.label!
 
   if args.mouse.click or args.keyboard.key_up.space
     if args.mouse.intersect_rect?({x:460, y:300, w:480, h:90})
