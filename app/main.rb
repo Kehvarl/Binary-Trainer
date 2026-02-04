@@ -60,6 +60,7 @@ def decimal_tick args
 end
 
 def binary_tick args
+  # To Do:  Set a a value, wait until the user submits what they think is right, then light Green/Red
   args.state.binary.each{|d| d.tick(args)}
 
   args.outputs.primitives << {x:0, y:0, w:1280, h:720, r:0, g:0, b:0}.solid!
