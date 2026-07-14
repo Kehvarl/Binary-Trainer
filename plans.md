@@ -8,7 +8,6 @@ Lights that show what the switch shows, or _should_ show.
 
 Then we need a nice layout.
 
-
 Basic component:
 Lighted Switch
   Light_Follows_Switch
@@ -21,4 +20,3 @@ Switch Set:
   Set Switches value
   Set Lights Value
   Read Values
-  
