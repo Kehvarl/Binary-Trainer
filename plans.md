@@ -20,6 +20,3 @@ Switch Set:
   Set Switches value
   Set Lights Value
   Read Values
-
-
-no net
